@@ -1,0 +1,22 @@
+{% extends 'todos/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <div class="todo">
+    {% if post.due_date %}
+      <div class="date">
+        {{ post.due_date }}
+      </div>
+    {% endif %}
+    <a class="btn btn-warning" href="{% url 'edit_todo' id=todo.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class="btn btn-danger" href="{% url 'delete_todo' id=todo.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+    <h2>{{ todo.title }}</h2>
+    <p>{{ todo.description|linebreaksbr }}</p>
+  </div>
+  {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">login</a>
+  {% endif %}
+{% endblock %}
+
+

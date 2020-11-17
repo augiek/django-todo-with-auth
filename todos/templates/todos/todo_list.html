@@ -1,0 +1,18 @@
+{% extends 'todos/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% for todo in todos %}
+  <div>
+    <h2><a href="{% url 'todo_detail' id=todo.id %}">{{ todo.title }}</a></h2>
+    <em>by: {{ todo.user }}</em>
+    <p>{{ todo.description|linebreaksbr }}</p>
+  </div>
+  <hr>
+{% endfor %}
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">login</a>
+  {% endif %}
+{% endblock %}
+
